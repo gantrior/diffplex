@@ -153,18 +153,22 @@ namespace DiffPlex
                     
                     begin = i + 1;
                 }
-                else if (i >= str.Length - 1)
+                else
                 {
-                    list.Add(str.Substring(begin, (i + 1 - begin)));
-                }
-                else if (processingDelim)
-                {
-                    if (i - delimBegin > 0)
+                    if (processingDelim)
                     {
-                        list.Add(str.Substring(delimBegin, (i - delimBegin)));
+                        if (i - delimBegin > 0)
+                        {
+                            list.Add(str.Substring(delimBegin, (i - delimBegin)));
+                        }
+
+                        processingDelim = false;
                     }
 
-                    processingDelim = false;
+                    if (i >= str.Length - 1)
+                    {
+                        list.Add(str.Substring(begin, (i + 1 - begin)));
+                    }
                 }
             }
 
